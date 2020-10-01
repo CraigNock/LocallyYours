@@ -5,32 +5,40 @@ import {MEDIA_GATE} from '../../constants';
 import Navbar from '../Navbar';
 import SearchBar from '../SearchBar';
 import SDKwidget from '../SDKwidget';
+import {latlng} from '../../types';
 
 
 
 const Main = () => {
-
+  const [coords, setCoords] = useState<latlng>({
+    lat: 45.50717558, 
+    lng: -73.5780121,
+  });
 
   return (
-    <StyledDiv>
+    <StyledDiv data-css='main'>
       <Navbar />
-      <SearchBar/>
-      <SDKwidget/>
+      <SearchBar setCoords={setCoords}/>
+      <SDKwidget coords={coords}/>
     </StyledDiv>
   );
 }
 
 const StyledDiv = styled.div`
   min-height: 100vh;
-  display: grid;
+  /* display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto ;
   grid-template-areas: 
     'navbar'
     'search'
-    'widget';
+    'widget'; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 
-  padding: 2rem;
+  /* padding: 2rem; */
   @media (min-width: ${MEDIA_GATE.tablet}px){
     
   };

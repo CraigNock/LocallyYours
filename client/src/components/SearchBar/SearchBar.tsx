@@ -1,4 +1,4 @@
-import React, {useState, PropsWithChildren } from 'react';
+import React, {useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
@@ -7,19 +7,19 @@ import {fetchCoords} from '../../apiCalls';
 import {latlng, resObject} from '../../types';
 
 interface props {
-
+  setCoords: React.Dispatch<React.SetStateAction<latlng>>,
 };
-const SearchBar : React.FC<PropsWithChildren<props>> = () => {
+const SearchBar : React.FC<props> = ({setCoords}) => {
   const [inputValue, setInputValue] = useState<string>('');
 //disables submit button while searching
   const [disable, setDisable] = useState<boolean>(false);
 //used to display errors returned from fetch
   const [error, setError] = useState<string>('');
 
-  const [coords, setCoords] = useState<latlng>({
-    lat: 45.50717558, 
-    lng: -73.5780121,
-  });
+  // const [coords, setCoords] = useState<latlng>({
+  //   lat: 45.50717558, 
+  //   lng: -73.5780121,
+  // });
   const [fullAddress, setFullAddress] = useState<string>('');
 
   const submitHandle = async (search:string) : Promise<any> => {
@@ -28,7 +28,6 @@ const SearchBar : React.FC<PropsWithChildren<props>> = () => {
     setDisable(true);
     // setLoading(true);
     console.log('search', search);
-    // run fetch function, handle error
     const result: resObject = await fetchCoords(search);
     console.log('result', result);
     if(typeof result.coords === 'object'){
@@ -44,7 +43,7 @@ const SearchBar : React.FC<PropsWithChildren<props>> = () => {
   };
 
   return (
-    <Wrapper>
+    <Wrapper data-css='searchbar'>
       <StyledForm> 
         <SearchBox>
           <StyledInput 
@@ -84,9 +83,6 @@ const SearchBar : React.FC<PropsWithChildren<props>> = () => {
       </Message>
       <Message2>
         {fullAddress}
-      </Message2>
-      <Message2>
-        {`Latitiude ${coords.lat}, Longtitude ${coords.lng}`}
       </Message2>
     </Wrapper>
   )
@@ -153,9 +149,9 @@ const SearchButton = styled(motion.button)`
   background: whitesmoke;
   border-radius: 0 .5rem .5rem 0;
   border: none;
-  -webkit-box-shadow: 0px 3px 15px rgba(218,165,32,.5);
+  /* -webkit-box-shadow: 0px 3px 15px rgba(218,165,32,.5);
   -moz-box-shadow: 0px 3px 15px rgba(218,165,32,.5);
-  box-shadow: 0px 3px 15px rgba(218,165,32,.5);
+  box-shadow: 0px 3px 15px rgba(218,165,32,.5); */
 `;
 const Message = styled.p`
   margin: 1rem auto;

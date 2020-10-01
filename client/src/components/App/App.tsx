@@ -18,7 +18,10 @@ const App = () => {
 };
 
 const Wrapper = styled.div`
-  background-color:black;
+  background-color: slategray;
+  margin: 0;
+  padding: 0;
+  /* width: 100%; */
   @media (min-width: ${MEDIA_GATE.tablet}px){
     
   };

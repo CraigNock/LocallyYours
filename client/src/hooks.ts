@@ -20,15 +20,15 @@ export const useExternalScript = (scriptUrl: string) => {
     document.body.appendChild(script);
 
     return () => {
+      console.log('remove external script');
       document.body.removeChild(script);
     };
-  }, [scriptUrl]);
+  });
 };
 
 //////////////////////////
 
 export const useLocalLogicFunctionScript = (widgetTargetId: string, lat: number, lng: number) => {
-  // console.log('blehhhg');
   useEffect(() => {
     console.log('function script');
     // console.log('widgetTargetId, lat, lng', widgetTargetId, lat, lng);
@@ -49,7 +49,7 @@ export const useLocalLogicFunctionScript = (widgetTargetId: string, lat: number,
     document.body.appendChild(func);
 
     return () => {
-      console.log('func remove');
+      console.log('remove function');
       document.body.removeChild(func);
     };
   }, [lat, lng]);

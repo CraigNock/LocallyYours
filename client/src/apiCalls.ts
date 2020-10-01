@@ -6,7 +6,7 @@ export const fetchCoords = async (address: string): Promise<any> => {
   return fetch(`/findAddress/${address}`)
   .then(data => data.json())
   .then(data => {
-    console.log('FEdata', data);
+    // console.log('FEdata', data);
     return data;
 // ALSO ADD A NORTH AMERICA ONLY FILTER
   })
