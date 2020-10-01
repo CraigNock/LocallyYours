@@ -26,4 +26,5 @@ export default SDKwidget;
 
 const StyledDiv = styled.div`
   grid-area: widget;
+  max-width: 90vw;
 `;

@@ -24,7 +24,7 @@ const StyledDiv = styled.div`
   min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: auto auto 1fr;
+  grid-template-rows: auto ;
   grid-template-areas: 
     'navbar'
     'search'

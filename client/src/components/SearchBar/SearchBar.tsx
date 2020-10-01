@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 import {MEDIA_GATE} from '../../constants';
 import {fetchCoords} from '../../apiCalls';
-import {coordReturn} from '../../types';
+import {latlng, resObject} from '../../types';
 
 interface props {
 
@@ -16,21 +16,27 @@ const SearchBar : React.FC<PropsWithChildren<props>> = () => {
 //used to display errors returned from fetch
   const [error, setError] = useState<string>('');
 
-  const [coords, setCoords] = useState<number[]>([45.50717558, -73.5780121]);
+  const [coords, setCoords] = useState<latlng>({
+    lat: 45.50717558, 
+    lng: -73.5780121,
+  });
+  const [fullAddress, setFullAddress] = useState<string>('');
 
   const submitHandle = async (search:string) : Promise<any> => {
     if(!search || search.length < 2) return;
 //disables search button until results fetched
     setDisable(true);
     // setLoading(true);
-    
+    console.log('search', search);
     // run fetch function, handle error
-    const result: number[] | string = await fetchCoords(search);
-    if(typeof result === 'object'){
+    const result: resObject = await fetchCoords(search);
+    console.log('result', result);
+    if(typeof result.coords === 'object'){
       setError('');
-      setCoords(result);
+      setCoords(result.coords);
+      setFullAddress(result.fullAddress);
     } else {
-      setError(result);
+      setError(result.coords);
     };
 
     setDisable(false);
@@ -38,50 +44,62 @@ const SearchBar : React.FC<PropsWithChildren<props>> = () => {
   };
 
   return (
-    <>
-    <StyledForm> 
-      <SearchBox>
-        <StyledInput 
-          type="text"
-          onChange={(e)=>{
-            setInputValue(e.target.value);
-            if(e.target.value === '') return;
-            submitHandle(e.target.value);
+    <Wrapper>
+      <StyledForm> 
+        <SearchBox>
+          <StyledInput 
+            type="text"
+            onChange={(e)=>{
+              setInputValue(e.target.value);
+              // if(e.target.value === '') return;
+              // submitHandle(e.target.value);
+            }}
+            value={inputValue}
+            placeholder={'Enter Address'}
+          />
+          <ClearButton
+            onClick={()=>setInputValue('')}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            X
+          </ClearButton>
+        </SearchBox>
+        <SearchButton
+          type='submit'
+          onClick={(e)=>{
+            e.preventDefault();
+            if(inputValue === '') return;
+            submitHandle(inputValue);
           }}
-          value={inputValue}
-          placeholder={'Enter Address'}
-        />
-        <ClearButton
-          onClick={()=>setInputValue('')}
+          disabled={disable}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
-          X
-        </ClearButton>
-      </SearchBox>
-      <SearchButton
-        type='submit'
-        onClick={(e)=>{
-          e.preventDefault();
-          if(inputValue === '') return;
-          submitHandle(inputValue);
-        }}
-        disabled={disable}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-      >
-        Search!
-      </SearchButton>
-    </StyledForm> 
-    <Message>
-      {error}
-      {`lat:${coords[0]}, lng:${coords[1]}`}
-    </Message>
-    </>
+          Search!
+        </SearchButton>
+      </StyledForm> 
+      <Message>
+        {error}
+      </Message>
+      <Message2>
+        {fullAddress}
+      </Message2>
+      <Message2>
+        {`Latitiude ${coords.lat}, Longtitude ${coords.lng}`}
+      </Message2>
+    </Wrapper>
   )
 }
 
 export default SearchBar;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
 
 const StyledForm = styled.form`
   grid-area: search;
@@ -141,7 +159,12 @@ const SearchButton = styled(motion.button)`
 `;
 const Message = styled.p`
   margin: 1rem auto;
+  min-height: 1rem;
   font-size: .8rem;
   color: orange;
   font-family: 'Limelight', cursive;
+`;
+const Message2 = styled(Message)`
+  color: whitesmoke;
+  font-size: 1rem;
 `;
