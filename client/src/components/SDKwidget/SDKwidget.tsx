@@ -35,6 +35,15 @@ const StyledDiv = styled.div`
   grid-area: widget;
   max-width: 90%;
   overflow: hidden;
+  @media (min-width: ${MEDIA_GATE.tablet}px){
+    
+  };
+  @media (min-width: ${MEDIA_GATE.desktop}px){
+    
+  };
+  @media (min-width: ${MEDIA_GATE.widescreen}px){
+      
+  };
 `;
 const LatLngDisplay = styled.p`
   padding: .25rem;
