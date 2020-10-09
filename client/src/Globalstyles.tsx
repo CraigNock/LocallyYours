@@ -34,7 +34,7 @@ body {
   line-height: 1;
 	width: 100%;
   background-color: #2b2d2f;
-	background-color: yellow;
+	/* background-color: yellow; */
   color: whitesmoke;
 }
 ol, ul {

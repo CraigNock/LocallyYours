@@ -10,6 +10,7 @@ import {latlng} from '../../types';
 
 
 const Main = () => {
+  const [loading, setLoading] = useState<boolean>(false);
   const [coords, setCoords] = useState<latlng>({
     lat: 45.50717558, 
     lng: -73.5780121,
