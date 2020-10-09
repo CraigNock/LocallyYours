@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import {useExternalScript, useLocalLogicFunctionScript} from '../../hooks';
 import {latlng} from '../../types';
+import { MEDIA_GATE } from '../../constants';
 
 interface props {
   coords:latlng
