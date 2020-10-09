@@ -53,6 +53,7 @@ const Front = styled(motion.div)`
   position: relative;
   height: 80%;
   width: 80%;
+  padding: 1rem;
   background: whitesmoke;
   border-radius: 1rem;
   -webkit-box-shadow: 0px 3px 15px rgba(0,0,0,.5);

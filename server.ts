@@ -16,7 +16,11 @@ const addressCoordHandler: RequestHandler = async (req, res) => {
 
   try {
     console.log('process.env.GEOCODE_KEY', process.env.GEOCODE_KEY);
-    let data = await opencage.geocode({q: address, key:process.env.GEOCODE_KEY});
+    let data = await opencage.geocode({
+      q: address, 
+      countrycode: 'ca,us', 
+      key:process.env.GEOCODE_KEY
+    });
     console.log('BEdata.status', data.status);
     // console.log('BEdata', data);
     if(data.results[0] === undefined){
