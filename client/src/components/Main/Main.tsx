@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import {MEDIA_GATE} from '../../constants';
 import Navbar from '../Navbar';
+import Modal from '../Modal';
 import SearchBar from '../SearchBar';
 import SDKwidget from '../SDKwidget';
 import {latlng} from '../../types';
@@ -10,6 +11,7 @@ import {latlng} from '../../types';
 
 
 const Main = () => {
+  const [showModal, setShowModal] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [coords, setCoords] = useState<latlng>({
     lat: 45.50717558, 
@@ -18,7 +20,13 @@ const Main = () => {
 
   return (
     <StyledDiv data-css='main'>
-      <Navbar />
+      <Navbar setShowModal={setShowModal}/>
+      <Modal
+        showModal={showModal}
+        setShowModal={setShowModal}
+      >
+
+      </Modal>
       <SearchBar setCoords={setCoords}/>
       <SDKwidget coords={coords}/>
     </StyledDiv>

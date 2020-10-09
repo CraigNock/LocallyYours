@@ -6,9 +6,9 @@ import { motion } from 'framer-motion';
 import {GoQuestion} from 'react-icons/go';
 
 interface props {
-
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>,
 };
-const Navbar : React.FC<PropsWithChildren<props>> = () => {
+const Navbar : React.FC<PropsWithChildren<props>> = ({setShowModal}) => {
 
   return (
     <Wrapper data-css='nav'>
@@ -16,6 +16,7 @@ const Navbar : React.FC<PropsWithChildren<props>> = () => {
         Locally Yours
       </Title>
       <About
+        onClick={()=>{setShowModal(true)}}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
