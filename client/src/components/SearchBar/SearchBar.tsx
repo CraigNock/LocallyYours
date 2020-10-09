@@ -20,7 +20,7 @@ const SearchBar : React.FC<props> = ({setCoords}) => {
   //   lat: 45.50717558, 
   //   lng: -73.5780121,
   // });
-  const [fullAddress, setFullAddress] = useState<string>('');
+  const [fullAddress, setFullAddress] = useState<string>('Enter an address in North America to see how it rates!');
 
   const submitHandle = async (search:string) : Promise<any> => {
     if(!search || search.length < 2) return;
@@ -94,17 +94,17 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
 `;
 
 const StyledForm = styled.form`
   grid-area: search;
   display: flex;
   align-items: center;
-  margin: 1rem 1rem .5rem;
+  margin: 1rem 0 .5rem 0;
   @media (min-width: ${MEDIA_GATE.desktop}px){
     max-width: 50vw;
-    margin: 1rem auto;
+    margin: 2rem auto 1rem;
   };
 `;
 const SearchBox = styled.div`
@@ -118,7 +118,7 @@ const StyledInput = styled.input`
   height: 2rem;
   width: 100%;
   padding: 0 2rem 0 .5rem;
-  font-family: 'Raleway', sans-serif;
+  /* font-family: 'Raleway', sans-serif; */
   border-radius: .5rem 0 0 .5rem;
   border: none;
   -webkit-box-shadow: 0px 3px 15px rgba(0,0,0,.5);
@@ -154,7 +154,7 @@ const SearchButton = styled(motion.button)`
   box-shadow: 0px 3px 15px rgba(218,165,32,.5); */
 `;
 const Message = styled.p`
-  margin: 1rem auto;
+  margin: 0 auto 1rem;
   min-height: 1rem;
   font-size: .8rem;
   color: orange;
