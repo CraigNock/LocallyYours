@@ -10,13 +10,13 @@ interface props {
   coords:latlng
 };
 const SDKwidget: React.FC<props> = ({coords}) => { 
-  const [lat, setLat] = useState<number>(45.50717558);
-  const [lng, setLng] = useState<number>(-73.5780121);
+  // const [lat, setLat] = useState<number>(45.50717558);
+  // const [lng, setLng] = useState<number>(-73.5780121);
   let widgetTargetId = 'local-content-widget';
   
   useLocalLogicFunctionScript(widgetTargetId, coords.lat, coords.lng);
   
-  useExternalScript(`https://cdn.locallogic.co/sdk/?token=${process.env.REACT_APP_LOCALLOGICSDK}&callback=initLocallogic`);
+  useExternalScript(`https://cdn.locallogic.co/sdk/?token=${process.env.REACT_APP_LOCALLOGICSDK}&callback=initLocallogic`, coords.lat, coords.lng);
   
 
   return (

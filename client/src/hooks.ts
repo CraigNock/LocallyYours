@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 
  * @return {null} Does not return anything.
  */
-export const useExternalScript = (scriptUrl: string) => {
+export const useExternalScript = (scriptUrl: string, lat: number, lng: number) => {
   useEffect(() => {
     console.log('external script');
 
@@ -23,7 +23,7 @@ export const useExternalScript = (scriptUrl: string) => {
       console.log('remove external script');
       document.body.removeChild(script);
     };
-  });
+  }, [lat, lng]);
 };
 
 //////////////////////////
